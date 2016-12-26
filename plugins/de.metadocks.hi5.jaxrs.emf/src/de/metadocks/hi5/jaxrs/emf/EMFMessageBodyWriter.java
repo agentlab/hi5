@@ -38,8 +38,8 @@ public class EMFMessageBodyWriter implements MessageBodyWriter<EObject> {
 
 	@Activate
 	public void activate() {
-		converter.setConvertReferences(true);
-		converter.setResolveProxies(true);
+        //converter.setConvertReferences(true);
+        //converter.setResolveProxies(true);
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class EMFMessageBodyWriter implements MessageBodyWriter<EObject> {
 	@Override
 	public void writeTo(EObject arg0, Class<?> arg1, Type arg2, Annotation[] arg3, MediaType arg4,
 			MultivaluedMap<String, Object> arg5, OutputStream arg6) throws IOException, WebApplicationException {
-		JSONObject jObj = (JSONObject) converter.convert((EObject) arg0);
+		JSONObject jObj = (JSONObject) converter.convert(arg0);
 
 		try {
 			OutputStreamWriter writer = new OutputStreamWriter(arg6);

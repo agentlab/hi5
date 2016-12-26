@@ -21,12 +21,12 @@
 <repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20160520211859/repository/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.emf.texo.sdk.feature.group" version="0.9.0.v201606022133"/>
+<unit id="org.eclipse.emf.texo.sdk.feature.group" version="0.0.0"/>
 <repository location="http://download.eclipse.org/modeling/emft/texo/updates/interim"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="de.metdocks.hi5.externals.feature.feature.group" version="0.7.0.201608141632"/>
-<repository location="file:./externals/"/>
+<repository location="http://agentlab.ru/p2/orbit/de.metdocks.hi5.externals/"/>
 </location>
 </locations>
 </target>

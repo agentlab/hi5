@@ -31,6 +31,9 @@
 		<module>de.metadocks.hi5.com.w3schools.w3css</module>
 		<module>de.metadocks.hi5.org.jquery</module>
 		<module>de.metadocks.hi5.org.requirejs</module>
+		
+		<module>de.metadocks.hi5.jaxrs</module>
+		<module>de.metadocks.hi5.jaxrs.jersey</module>
 
 		<module>de.metadocks.hi5.demo.app</module>
 		<module>de.metadocks.hi5.demo</module>
