@@ -101,6 +101,8 @@
       <feature id="org.eclipse.equinox.server.core"/>
       <feature id="org.eclipse.equinox.executable"/>
       <feature id="org.eclipse.equinox.core.sdk"/>
+      <feature id="com.google.guava.feature" version="18.0.0.201502021635"/>
+      <feature id="de.metdocks.hi5.externals.feature" version="0.7.0.qualifier"/>
    </features>
 
    <configurations>
