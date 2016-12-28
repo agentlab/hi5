@@ -3,9 +3,12 @@
 <head>
 <meta charset="utf-8">
 <title>jQuery UI Example Page</title>
-<link href="demo/demo.css" rel="stylesheet">
-<link
-	href="http://fonts.googleapis.com/css?family=Kristi|Alegreya+Sans:300,800"
+<script data-main="http://localhost:8080/hi5-demo/demo/app" src="http://localhost:8080/hi5-demo/requirejs/require.js"></script>
+
+<script src="http://localhost:8080/hi5-demo/hi5/ws/require/config.js"></script>
+
+<link href="demo.css" rel="stylesheet">
+<link href="http://fonts.googleapis.com/css?family=Kristi|Alegreya+Sans:300,800"
 	rel="stylesheet" type="text/css">
 <link rel="stylesheet"
 	href="http://netdna.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
@@ -705,7 +708,7 @@
 	</div>
 
 	<script>
-		requirejs([ 'demo/app.js' ]);
+		requirejs([ 'app.js' ]);
 	</script>
 </body>
 </html>

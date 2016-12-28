@@ -127,8 +127,15 @@ public class JaxRSComponentsRegistry {
 		}
 
 		String wsAlias = alias + "/ws";
+        System.out.println("\tRegister REST " + wsAlias + "\t\tfrom bundle " + bundle.getSymbolicName());
+        for (Object object : services)
+        {
+            System.out.println("\t\tClass " + object.getClass().getName());
+        }
+
 		Application application = new Application() {
-			public Set<Object> getSingletons() {
+			@Override
+            public Set<Object> getSingletons() {
 				return services;
 			};
 		};

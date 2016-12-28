@@ -68,10 +68,10 @@ public class WebResourcesRegistry {
 
 	/**
 	 * TODO listen to bundle changes for unregistering resources
-	 * 
+	 *
 	 * @throws IOException
 	 * @throws ConfigurationException
-	 * 
+	 *
 	 */
 	public void registerResources(String entryPoint) throws ConfigurationException {
 		BundleContext bundleContext = FrameworkUtil.getBundle(WebResourcesRegistry.class).getBundleContext();
@@ -116,10 +116,14 @@ public class WebResourcesRegistry {
 
 		HttpContext delegateHttpContext = createHttpContext(bundle);
 		try {
+            System.out.println("\tRegister resource " + alias + "\t\tfrom bundle " + bundle.getSymbolicName());
 			httpService.registerResources(alias, webResource, delegateHttpContext);
 			registeredResources.add(alias);
+
 			bundleNameToAlias.put(bundle.getSymbolicName(), alias);
-			String wsAlias = jaxRsComponentsRegistry.registerRestServices(httpService, alias, delegateHttpContext,
+
+            String wsAlias =
+                jaxRsComponentsRegistry.registerRestServices(httpService, alias, delegateHttpContext,
 					bundle);
 			if (wsAlias != null) {
 				registeredResources.add(wsAlias);

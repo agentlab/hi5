@@ -35,7 +35,6 @@ import org.eclipse.e4.ui.internal.workbench.ResourceHandler;
 import org.eclipse.e4.ui.internal.workbench.SelectionAggregator;
 import org.eclipse.e4.ui.internal.workbench.URIHelper;
 import org.eclipse.e4.ui.internal.workbench.WorkbenchLogger;
-import org.eclipse.e4.ui.model.application.MAddon;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.MApplicationElement;
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
@@ -90,7 +89,7 @@ public class E4Runtime {
 
 		MApplication application = workbench.getApplication();
 		MApplication copy = (MApplication) EcoreUtil.copy((EObject) application);
-		return (MApplication) copy;
+		return copy;
 	}
 
 	public E4Workbench createE4Workbench(IApplicationContext applicationContext) {
@@ -166,12 +165,12 @@ public class E4Runtime {
 		}
 
 		// Create the addons
-		IEclipseContext addonStaticContext = EclipseContextFactory.create();
-		for (MAddon addon : appModel.getAddons()) {
-			addonStaticContext.set(MAddon.class, addon);
-			Object obj = factory.create(addon.getContributionURI(), appContext, addonStaticContext);
-			addon.setObject(obj);
-		}
+        //IEclipseContext addonStaticContext = EclipseContextFactory.create();
+        //for (MAddon addon : appModel.getAddons()) {
+        //	addonStaticContext.set(MAddon.class, addon);
+        //	Object obj = factory.create(addon.getContributionURI(), appContext, addonStaticContext);
+        //	addon.setObject(obj);
+        //}
 
 		// Parse out parameters from both the command line and/or the product
 		// definition (if any) and put them in the context
@@ -235,17 +234,23 @@ public class E4Runtime {
 	private Optional<String> getArgValue(String argName, IApplicationContext appContext, boolean singledCmdArgValue) {
 		// Is it in the arg list ?
 		if (argName == null || argName.length() == 0)
-			return Optional.empty();
+        {
+            return Optional.empty();
+        }
 
 		if (singledCmdArgValue) {
 			for (int i = 0; i < args.length; i++) {
 				if (("-" + argName).equals(args[i]))
-					return Optional.of("true");
+                {
+                    return Optional.of("true");
+                }
 			}
 		} else {
 			for (int i = 0; i < args.length; i++) {
 				if (("-" + argName).equals(args[i]) && i + 1 < args.length)
-					return Optional.of(args[i + 1]);
+                {
+                    return Optional.of(args[i + 1]);
+                }
 			}
 		}
 
@@ -343,7 +348,9 @@ public class E4Runtime {
 		IEclipseContext appContext = appModel.getContext();
 		// make sure we only add trackers once
 		if (appContext.containsKey(CONTEXT_INITIALIZED))
-			return;
+        {
+            return;
+        }
 		appContext.set(CONTEXT_INITIALIZED, "true");
 		// initializeApplicationServices(appContext);
 		List<MWindow> windows = appModel.getChildren();
@@ -354,9 +361,13 @@ public class E4Runtime {
 			@Override
 			public void notifyChanged(Notification notification) {
 				if (notification.getFeatureID(MApplication.class) != UiPackageImpl.ELEMENT_CONTAINER__CHILDREN)
-					return;
+                {
+                    return;
+                }
 				if (notification.getEventType() != Notification.ADD)
-					return;
+                {
+                    return;
+                }
 				MWindow childWindow = (MWindow) notification.getNewValue();
 				initializeWindowServices(childWindow);
 			}
@@ -372,7 +383,9 @@ public class E4Runtime {
 			@Override
 			public void notifyChanged(Notification notification) {
 				if (notification.getFeatureID(MWindow.class) != BasicPackageImpl.WINDOW__CONTEXT)
-					return;
+                {
+                    return;
+                }
 				IEclipseContext windowContext = (IEclipseContext) notification.getNewValue();
 				initWindowContext(windowContext);
 			}
@@ -381,7 +394,9 @@ public class E4Runtime {
 
 	static private void initWindowContext(IEclipseContext windowContext) {
 		if (windowContext == null)
-			return;
+        {
+            return;
+        }
 		SelectionAggregator selectionAggregator = ContextInjectionFactory.make(SelectionAggregator.class,
 				windowContext);
 		windowContext.set(SelectionAggregator.class, selectionAggregator);
@@ -401,7 +416,7 @@ public class E4Runtime {
 	public MApplicationElement getModelElement(String id) {
 		TreeIterator<EObject> iter = ((EObject) workbench.getApplication()).eAllContents();
 		while (iter.hasNext()) {
-			EObject eObject = (EObject) iter.next();
+			EObject eObject = iter.next();
 
 			if (eObject instanceof MUIElement) {
 				String elementId = ((MApplicationElement) eObject).getElementId();
